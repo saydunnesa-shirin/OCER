@@ -20,9 +20,10 @@ namespace OCER.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<MockData>();
             services.AddScoped<IEquipmentRepository, EquipmentRepository>();
+            services.AddScoped<IRentRepository, RentRepository>();
             services.AddScoped<IEquipmentService, EquipmentService>();
+            services.AddScoped<IRentService, RentService>();
 
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();

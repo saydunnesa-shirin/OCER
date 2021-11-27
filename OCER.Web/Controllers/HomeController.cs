@@ -7,6 +7,7 @@ using System.Linq;
 using OCER.Service;
 using AutoMapper;
 using OCER.Common.Models;
+using System.Text.Json;
 
 namespace OCER.Web.Controllers
 {
@@ -24,20 +25,18 @@ namespace OCER.Web.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public JsonResult GetData()
         {
-            var equipments = _equipmentService.AllEquipments().ToList();
-
-            var equipmentViews = _mapper.Map<List<Equipment>, List<EquipmentViewModel>>(equipments);
-
-            var homeViewModel = new HomeViewModel
-            {
-                Equipments = equipmentViews
-            };
-
-            return View(homeViewModel);
+            var equipments = _equipmentService.AllEquipments(true).OrderBy(o=>o.Name).ToList();
+            var data = _mapper.Map<List<Equipment>, List<EquipmentViewModel>>(equipments);
+            var json = JsonSerializer.Serialize(data);
+            return Json(json);
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

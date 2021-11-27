@@ -1,15 +1,69 @@
-﻿@model HomeViewModel
-
-
-
+﻿
+@{
+    ViewData["Title"] = "Home";
+}
 <h2>Equipments</h2>
 <h4>Please choose your equipment for rent</h4>
-
+<br />
+<button id="rent">Rent</button>
+<br />
 <div class="row">
 
-    @foreach (var equipment in Model.Equipments)
-    {
-        <partial name="_Equipment" model="equipment" />
+    <div id="eqpGrid" class="ag-theme-alpine" style="height: 400px; width:1000px;"></div>
+
+    @section Scripts{
+
+        <script type="text/javascript">
+
+            // specify the columns
+            const columnDefs = [
+                { field: "Id", hide: true },
+                { field: "Name", sortable: true, filter: true },
+                { field: "EquipmentTypeId", hide: true },
+                { field: "EquipmentType" },
+                { field: "Days", editable: true, valueParser: numberParser }
+            ];
+
+            // let the grid know which columns and what data to use
+            const gridOptions = {
+                columnDefs: columnDefs
+            };
+
+            // lookup the container we want the Grid to use
+            const eGridDiv = document.querySelector('#eqpGrid');
+
+            // create the grid passing in the div to use together with the columns & data we want to use
+            new agGrid.Grid(eGridDiv, gridOptions);
+
+            function numberParser(params) {
+                return Number(params.newValue);
+            }
+
+            fetch('Home/GetData')
+                .then(response => response.json())
+                .then(data => {
+                    data = JSON.parse(data)
+                   // console.log(data)
+                    gridOptions.api.setRowData(data);
+                });
+
+            $('#rent').on('click', function () {
+                
+                var equipments = [];
+                gridOptions.api.forEachNode(function (node) {
+                    equipments.push(node.data);
+                });
+
+                $.post('Rent/RentEquipments', { equipments: equipments },
+	                function () {
+                        console.log('Equipment(s) added to rent.');
+	                }).done(function(data)
+                    {
+                        window.location.replace("Rent");
+                    });
+            });
+
+        </script>
     }
 
 </div>

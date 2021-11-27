@@ -8,17 +8,17 @@ namespace OCER.Common.Models
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("RentId")]
-        public virtual Rent Rent { get; set; }
+        //[ForeignKey("RentId")]
+        //public virtual Rent Rent { get; set; }
         [Required]
         public int RentId { get; set; }
 
-        [ForeignKey("EquipmentId")]
-        public virtual Equipment Equipment { get; set; }
+        //[ForeignKey("EquipmentId")]
+        //public virtual Equipment Equipment { get; set; }
         [Required]
         public int EquipmentId { get; set; }
 
         [Required]
-        public int NoOfDays { get; set; }
+        public int Days { get; set; }
     }
 }
