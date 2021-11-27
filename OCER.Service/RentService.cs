@@ -1,20 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using OCER.Common.Models;
+using OCER.Repository;
 
 namespace OCER.Service
 {
     public class RentService : IRentService
     {
         private readonly ILogger<RentService> _logger;
-
-        public RentService(ILogger<RentService> logger)
+        private readonly IRentRepository _rentRepository;
+        public RentService(ILogger<RentService> logger, IRentRepository rentRepository)
         {
             _logger = logger;
+            _rentRepository = rentRepository;
+        }
+
+        public bool AddToRent(RentDetail rentDetail)
+        {
+            var result = _rentRepository.AddToRent(rentDetail);
+
+            //foreach (var item in MockData.AllEquipments)
+            //{
+            //    if (item.Id == rentDetail.EquipmentId)
+            //        item.InStock = false;
+            //}
+            _logger.LogInformation($" Added selected equipment by customer to rent item. Rent item: { rentDetail}");
+            return result;
+        }
+
+        public List<RentDetail> GetRentDetails()
+        {
+            return _rentRepository.GetRentDetails();
         }
 
         /// <summary>
@@ -49,6 +66,8 @@ namespace OCER.Service
 
             return price;
         }
+
+        
     }
 
         //(noOfDays>1? ((int) FeeType.Premium* 2 + (int) FeeType.Regular * (noOfDays-2)) :

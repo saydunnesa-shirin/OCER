@@ -1,21 +1,20 @@
 using NUnit.Framework;
-using OCER.Service;
 using OCER.Repository;
 using Moq;
 using Microsoft.Extensions.Logging;
-using System.Linq;
 using OCER.Common.Models;
-using System.Collections.Generic;
 
 namespace OCER.Service.Test
 {
     public class RentServiceTests
     {
         private readonly IRentService _rentService;
+        private readonly Mock<IRentRepository> _mockRentRepository;
         public RentServiceTests()
         {
             var rentServiceLogger = new Mock<ILogger<RentService>>();
-            _rentService = new RentService(rentServiceLogger.Object);
+            _mockRentRepository = new Mock<IRentRepository>();
+            _rentService = new RentService(rentServiceLogger.Object, _mockRentRepository.Object);
         }
 
         [SetUp]

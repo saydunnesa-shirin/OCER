@@ -16,12 +16,19 @@ namespace OCER.Service
             _equipmentRepository = equipmentRepository;
         }
 
-        public IEnumerable<Equipment> AllEquipments()
+        public IEnumerable<Equipment> AllEquipments(bool? InStock = null)
         {
             _logger.LogInformation("Getting all equipments");
-           return _equipmentRepository.AllEquipments();
+           return _equipmentRepository.AllEquipments(InStock);
         }
 
+        public Equipment GetEquipmentById(int id) => _equipmentRepository.GetEquipmentById(id);
+
         public IEnumerable<Equipment> GetEquipmentsByType(int equipmentType) => _equipmentRepository.GetEquipmentsByType(equipmentType);
+
+        public void StockOutEquipment(int id)
+        {
+            _equipmentRepository.StockOutEquipment(id);
+        }
     }
 }

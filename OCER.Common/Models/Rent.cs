@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,5 +20,7 @@ namespace OCER.Common.Models
         //[Column(TypeName = "date")]
         [DataType(DataType.DateTime)]
         public DateTime RentDate { get; set; }
+
+        public IEnumerable<RentDetail> RentDetails { get; set; }
     }
 }

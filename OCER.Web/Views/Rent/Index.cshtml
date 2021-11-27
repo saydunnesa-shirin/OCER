@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "Rent";
+}
+
+<h2>Rent Confirmation</h2>
+<h4>Please review and confirm rent items</h4>
+
+<div class="row">
+
+    <div id="rentGrid" class="ag-theme-alpine" style="height: 400px; width:1000px;"></div>
+
+    @section Scripts{
+
+        <script type="text/javascript">
+
+            const columnDefs = [
+                { field: "Id", headerName: 'SL#', },
+                { field: "EquipmentName" },
+                { field: "Days" },
+                { field: "Price" }
+            ];
+
+            const gridOptions = {
+                columnDefs: columnDefs
+            };
+
+            const eGridDiv = document.querySelector('#rentGrid');
+
+            new agGrid.Grid(eGridDiv, gridOptions);
+
+            function numberParser(params) {
+                return Number(params.newValue);
+            }
+
+            fetch('Rent/GetData')
+                .then(response => response.json())
+                .then(data => {
+                    data = JSON.parse(data)
+                    console.log(data)
+                    gridOptions.api.setRowData(data);
+                });
+
+        </script>
+    }
+
+</div>
+
+<button id="rent">Confirm</button>

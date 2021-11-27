@@ -8,5 +8,12 @@
 
         public string EquipmentType { get; set; }
 
+        public int Days { get; set; }
+
+        public bool IsChecked { get; set; }
+
+        public bool InStock { get; set; }
+
+        public int EquipmentTypeId { get; set; }
     }
 }

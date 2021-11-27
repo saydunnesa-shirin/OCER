@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using OCER.Service;
 using OCER.Repository;
 using Moq;
 using Microsoft.Extensions.Logging;
@@ -28,7 +27,7 @@ namespace OCER.Service.Test
         [Test]
         public void AllEquipments_BasicTest()
         {
-            _mockEquipmentRepository.Setup(x => x.AllEquipments()).Returns
+            _mockEquipmentRepository.Setup(x => x.AllEquipments(true)).Returns
                 (
                     new List<Equipment>
                     {

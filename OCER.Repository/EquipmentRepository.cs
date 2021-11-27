@@ -6,15 +6,26 @@ namespace OCER.Repository
 {
     public class EquipmentRepository : IEquipmentRepository
     {
-        private readonly MockData _mockData;
-        public EquipmentRepository(MockData mockData)
+        //private readonly MockData _mockData;
+        //public EquipmentRepository(MockData mockData)
+        //{
+        //    _mockData = mockData;
+        //}
+        public IEnumerable<Equipment> AllEquipments(bool? InStock = null)
         {
-            _mockData = mockData;
+            if(InStock != null)
+                return MockData.AllEquipments.Where(q => q.InStock == true);
+            return MockData.AllEquipments;
         }
-        public IEnumerable<Equipment> AllEquipments() => _mockData.AllEquipments.Where(q => q.InStock == true);
 
-        public IEnumerable<Equipment> GetEquipmentsByType(int equipmentType = 0) => _mockData.AllEquipments
+        public IEnumerable<Equipment> GetEquipmentsByType(int equipmentType = 0) => MockData.AllEquipments
                 .Where(q => q.InStock == true && (int)q.EquipmentType == equipmentType);
-        //public Equipment GetEquipmentById(int equipmentId) => _mockData.AllEquipments.FirstOrDefault(q => q.Id == equipmentId);
+        
+        public Equipment GetEquipmentById(int equipmentId) => MockData.AllEquipments.FirstOrDefault(q => q.Id == equipmentId && q.InStock == true);
+
+        public void StockOutEquipment(int id)
+        {
+            MockData.AllEquipments.Where(x => x.Id == id).First().InStock =  false;
+        }
     }
 }
