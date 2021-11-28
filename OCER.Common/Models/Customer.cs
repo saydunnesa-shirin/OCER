@@ -15,7 +15,5 @@ namespace OCER.Common.Models
         [DataType(DataType.EmailAddress)]
         [EmailAddress]
         public string Email { get; set; }
-
-        public int? LoyaltyPoint { get; set; }
     }
 }

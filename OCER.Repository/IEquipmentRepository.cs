@@ -12,5 +12,7 @@ namespace OCER.Repository
         Equipment GetEquipmentById(int equipmentId);
 
         public void StockOutEquipment(int id);
+
+        public void StockInEquipment(int id);
     }
 }

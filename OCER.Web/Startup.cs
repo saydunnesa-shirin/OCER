@@ -24,6 +24,8 @@ namespace OCER.Web
             services.AddScoped<IRentRepository, RentRepository>();
             services.AddScoped<IEquipmentService, EquipmentService>();
             services.AddScoped<IRentService, RentService>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
 
             services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
