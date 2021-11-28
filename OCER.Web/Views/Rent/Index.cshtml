@@ -6,44 +6,97 @@
 <h2>Rent Confirmation</h2>
 <h4>Please review and confirm rent items</h4>
 
-<div class="row">
-
+<div>
     <div id="rentGrid" class="ag-theme-alpine" style="height: 400px; width:1000px;"></div>
+</div>
+<br /> <br />
+<button id="ConfirmRent"class="btn btn-primary">Confirm</button>
 
-    @section Scripts{
+@section Scripts{
 
-        <script type="text/javascript">
+    <script type="text/javascript">
 
-            const columnDefs = [
-                { field: "Id", headerName: 'SL#', },
-                { field: "EquipmentName" },
-                { field: "Days" },
-                { field: "Price" }
-            ];
+    //Grid start
+        const columnDefs = [
+            {
+                field: "",
+                headerName: 'Delete',
+                minWidth: 150,
+                checkboxSelection: true
+             },
+            { field: "Id", hide:true },
+            { field: "EquipmentName" },
+            { field: "Days" },
+            { field: "Price"}
+        ];
 
-            const gridOptions = {
-                columnDefs: columnDefs
-            };
+        const gridOptions = {
+            columnDefs: columnDefs,
+            rowSelection: "multiple",
+            defaultColDef: {
+            suppressKeyboardEvent: params => {
+              if (!params.editing) {
+                let isBackspaceKey = params.event.keyCode === 8;
+                let isDeleteKey = params.event.keyCode === 46;
 
-            const eGridDiv = document.querySelector('#rentGrid');
+                // Delete selected rows with back space
 
-            new agGrid.Grid(eGridDiv, gridOptions);
+                if (isDeleteKey) {
+                  const selectedRows = params.api.getSelectedRows();
+                  params.api.applyTransaction({ remove: selectedRows });
+                  return true;
+                }
 
-            function numberParser(params) {
-                return Number(params.newValue);
+
+                return false;
+              }
             }
+          }
 
-            fetch('Rent/GetData')
-                .then(response => response.json())
-                .then(data => {
-                    data = JSON.parse(data)
-                    console.log(data)
-                    gridOptions.api.setRowData(data);
+        };
+
+        const eGridDiv = document.querySelector('#rentGrid');
+
+        new agGrid.Grid(eGridDiv, gridOptions);
+
+        function numberParser(params) {
+            return Number(params.newValue);
+        }
+
+        fetch('Rent/GetData')
+            .then(response => response.json())
+            .then(data => {
+                data = JSON.parse(data)
+                console.log(data)
+                gridOptions.api.setRowData(data);
+            });
+    //grid end
+
+
+        $('#ConfirmRent').on('click', function () {
+                
+                var equipments = [];
+                gridOptions.api.forEachNode(function (node) {
+                    equipments.push(node.data);
                 });
 
-        </script>
-    }
+                $.post('Rent/ConfirmRent', { equipments: equipments },
+	                function () {
+                        console.log('Equipment(s) added to rent.');
+	                });
+            });
 
-</div>
+         
+        $('#GenerateInvoice').on('click', function () {
+                
+                $.post('Invoice/GetInvoiceData',
+	                function () {
+                        console.log('Equipment(s) added to Invoice.');
+	                }).done(function(data)
+                    {
+                        window.location.replace("Invoice");
+                    });
+            });
 
-<button id="rent">Confirm</button>
+    </script>
+}

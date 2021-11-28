@@ -19,16 +19,21 @@ namespace OCER.Service
         public bool AddToRent(RentDetail rentDetail)
         {
             var result = _rentRepository.AddToRent(rentDetail);
-
-            //foreach (var item in MockData.AllEquipments)
-            //{
-            //    if (item.Id == rentDetail.EquipmentId)
-            //        item.InStock = false;
-            //}
             _logger.LogInformation($" Added selected equipment by customer to rent item. Rent item: { rentDetail}");
             return result;
         }
 
+        public bool DeleteFromRent(RentDetail rentDetail)
+        {
+            var result = _rentRepository.DeleteFromRent(rentDetail);
+            _logger.LogInformation($" Delete equipment from rent. Rent item: { rentDetail}");
+            return result;
+        }
+
+        public Rent GetRent()
+        {
+            return _rentRepository.GetRent();
+        }
         public List<RentDetail> GetRentDetails()
         {
             return _rentRepository.GetRentDetails();
@@ -66,8 +71,40 @@ namespace OCER.Service
 
             return price;
         }
-
         
+        /// <summary>
+        /// Calculate customer loyality points based on equipment type
+        /// </summary>
+        /// <param name="equipmentType"></param>
+        /// <returns></returns>
+        public int CalculateBonus(int equipmentType)
+        {
+            int bonusPoint = 0;
+
+            if (equipmentType > 0)
+            {
+                switch (equipmentType)
+                {
+                    case (int)EquipmentType.Heavy:
+                        bonusPoint = 2;
+                        break;
+                    case (int)EquipmentType.Regular:
+                        bonusPoint = 1;
+                        break;
+                    case (int)EquipmentType.Specialized:
+                        bonusPoint = 1;
+                        break;
+
+                    default:
+                        _logger.LogWarning($"Unknown equipment type: {equipmentType}");
+                        break;
+                }
+            }
+
+            return bonusPoint;
+        }
+
+
     }
 
         //(noOfDays>1? ((int) FeeType.Premium* 2 + (int) FeeType.Regular * (noOfDays-2)) :

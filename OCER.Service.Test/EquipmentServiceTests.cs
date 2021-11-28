@@ -35,10 +35,19 @@ namespace OCER.Service.Test
                     }
                 );
 
-            var result = _equipmentService.AllEquipments().ToList();
+            var result = _equipmentService.AllEquipments(true).ToList();
 
             Assert.IsTrue(result.Count > 0);
+        }
 
+        [Test]
+        public void AllEquipments_ReturnsNothing_WhenNoInStockItem()
+        {
+            _mockEquipmentRepository.Setup(x => x.AllEquipments(true)).Returns(new List<Equipment>());
+
+            var result = _equipmentService.AllEquipments(true).ToList();
+
+            Assert.True(result.Count == 0);
         }
 
         [Test]

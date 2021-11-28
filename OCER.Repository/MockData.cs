@@ -24,12 +24,14 @@ namespace OCER.Repository
                 new Customer{Id=2, Name="Lisa K.", Email="lisa.k@gmail.com"}
             };
 
+            Rent = new Rent();
             RentDetails = new List<RentDetail>();
         }
-
+        public static int UserId = 2;
         public static IEnumerable<Equipment> AllEquipments;
         public static List<Customer> AllCustomers;
 
+        public static Rent Rent;
         public static List<RentDetail> RentDetails;
 
     }

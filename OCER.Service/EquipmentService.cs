@@ -30,5 +30,10 @@ namespace OCER.Service
         {
             _equipmentRepository.StockOutEquipment(id);
         }
+
+        public void StockInEquipment(int id)
+        {
+            _equipmentRepository.StockInEquipment(id);
+        }
     }
 }

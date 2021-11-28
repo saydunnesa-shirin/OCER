@@ -12,7 +12,6 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
-    <PackageReference Include="NonFactors.Grid.Mvc5" Version="7.1.3" />
   </ItemGroup>
 
   <ItemGroup>

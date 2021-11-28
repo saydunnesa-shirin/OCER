@@ -6,11 +6,6 @@ namespace OCER.Repository
 {
     public class EquipmentRepository : IEquipmentRepository
     {
-        //private readonly MockData _mockData;
-        //public EquipmentRepository(MockData mockData)
-        //{
-        //    _mockData = mockData;
-        //}
         public IEnumerable<Equipment> AllEquipments(bool? InStock = null)
         {
             if(InStock != null)
@@ -26,6 +21,11 @@ namespace OCER.Repository
         public void StockOutEquipment(int id)
         {
             MockData.AllEquipments.Where(x => x.Id == id).First().InStock =  false;
+        }
+
+        public void StockInEquipment(int id)
+        {
+            MockData.AllEquipments.Where(x => x.Id == id).First().InStock = true;
         }
     }
 }

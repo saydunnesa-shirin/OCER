@@ -1,0 +1,40 @@
+﻿@model InvoiceViewModel
+<p>
+<h2>@Model.Title</h2>
+<h4>@Model.CustomerName</h4>
+<h4>@Model.RentDate</h4>
+    
+</p>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Equipment
+        </th>
+        <th>
+           Price
+        </th>
+    </tr>
+
+@foreach (var item in Model.Rents) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EquipmentName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+    </tr>
+}
+
+<tfoot class="text-light bg-dark">
+    <tr>
+        <td>Total price</td>
+        <td>@Html.DisplayFor(x=> @Model.TotalPrice)</td>
+    </tr>
+    <tr>
+        <td>Customer loyalty points</td>
+        <td>@Model.BonusPoints</td>
+    </tr>
+</tfoot>
+</table>

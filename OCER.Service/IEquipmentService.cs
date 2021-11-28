@@ -12,5 +12,7 @@ namespace OCER.Service
         public Equipment GetEquipmentById(int id);
 
         public void StockOutEquipment(int id);
+
+        public void StockInEquipment(int id);
     }
 }

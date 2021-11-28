@@ -21,6 +21,6 @@ namespace OCER.Common.Models
         [DataType(DataType.DateTime)]
         public DateTime RentDate { get; set; }
 
-        public IEnumerable<RentDetail> RentDetails { get; set; }
+        public List<RentDetail> RentDetails { get; set; }
     }
 }
