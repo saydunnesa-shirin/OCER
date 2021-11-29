@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Home";
 }
-<h2>Equipments</h2>
+<h2>Equipment</h2>
 <h4>Please choose your equipment for rent</h4>
 <br />
 <button id="rent" class="btn btn-primary">Rent</button>
@@ -18,11 +18,11 @@
             // specify the columns
             const columnDefs = [
                 { field: "Id", hide: true },
-                { field: "Name", sortable: true, filter: true, minWidth: 250 },
+                { field: "Name", sortable: true, filter: true, minWidth: 300 },
                 { field: "EquipmentTypeId", hide: true },
                 { field: "EquipmentType", sortable: true, filter: true},
                 { field: "Days", editable: true, valueParser: numberParser },
-                { field: "Description" }
+                { field: "Description",  minWidth: 400 }
 
             ];
 
