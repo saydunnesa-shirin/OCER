@@ -5,6 +5,7 @@ It is an online construction equipment rental application. Customers can choose 
 Visual Studio 2019, .NET 5 MVC, AG-Grid.
 
 ## Project Structure
+![Project Structure Image](images/project_structure.png)
 
 ## Data Store
 I use a mock repository to store some static data.
@@ -26,3 +27,7 @@ Renting any equipment or processing an invoice will involve the following steps:
 5. On the rent page, Customers are able to see the calculated price of each piece of equipment based on the type of equipment and number of days.
 
 6. The invoice page will appear with all the rented equipment and a total price and customer loyalty points based on the type of equipment.
+
+## Class Diagram
+
+![Class Diagram Image](images/class_diagram.png)

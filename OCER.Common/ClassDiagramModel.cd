@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OCER.Common.Models.Customer">
+    <Position X="0.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OCER.Common.Models.Equipment">
+    <Position X="3.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACABAAAAAgAAAAAAAAAAQAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Equipment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="EquipmentType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="OCER.Common.Models.Invoice">
+    <Position X="6.25" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAEAAAAAAAAAAACAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Invoice.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Rent" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="OCER.Common.Models.Rent">
+    <Position X="3.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAAAQAAAAAAAAAAAAAAAAABAAAAIAAAAAAAA=</HashCode>
+      <FileName>Models\Rent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Customer" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="RentDetails" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="OCER.Common.Models.RentDetail">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAICAAAAEAQAAAAAAAAAA=</HashCode>
+      <FileName>Models\RentDetail.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Rent" />
+      <Property Name="Equipment" />
+    </ShowAsAssociation>
+  </Class>
+  <Enum Name="OCER.Common.Models.EquipmentType">
+    <Position X="5.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAACAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\EnumTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="OCER.Common.Models.FeeType">
+    <Position X="6.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAEAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\EnumTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
