@@ -18,7 +18,7 @@ namespace OCER.Service
 
         public bool AddToRent(RentDetail rentDetail)
         {
-            var result = _rentRepository.AddToRent(rentDetail);
+            var result = _rentRepository.AddRentDetail(rentDetail);
             _logger.LogInformation($" Added selected equipment by customer to rent item. Rent item: { rentDetail}");
             return result;
         }
@@ -28,6 +28,11 @@ namespace OCER.Service
             var result = _rentRepository.DeleteFromRent(rentDetail);
             _logger.LogInformation($" Delete equipment from rent. Rent item: { rentDetail}");
             return result;
+        }
+
+        public bool DeleteAllRentDetails()
+        {
+           return  _rentRepository.DeleteAllRentDetails();
         }
 
         public Rent GetRent()
@@ -104,9 +109,6 @@ namespace OCER.Service
             return bonusPoint;
         }
 
-
+        
     }
-
-        //(noOfDays>1? ((int) FeeType.Premium* 2 + (int) FeeType.Regular * (noOfDays-2)) :
-             //((int) FeeType.Premium* 2 + ((int) FeeType.Regular* (noOfDays - 2)))) ;
 }

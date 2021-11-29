@@ -9,7 +9,7 @@
 <br /><br />
 <div>
 
-    <div id="eqpGrid" class="ag-theme-alpine" style="height: 400px; width:1000px;"></div>
+    <div id="eqpGrid" class="ag-theme-alpine" style="height: 400px; width: 100%;"></div>
 
     @section Scripts{
 
@@ -18,10 +18,12 @@
             // specify the columns
             const columnDefs = [
                 { field: "Id", hide: true },
-                { field: "Name", sortable: true, filter: true },
+                { field: "Name", sortable: true, filter: true, minWidth: 250 },
                 { field: "EquipmentTypeId", hide: true },
-                { field: "EquipmentType" },
-                { field: "Days", editable: true, valueParser: numberParser }
+                { field: "EquipmentType", sortable: true, filter: true},
+                { field: "Days", editable: true, valueParser: numberParser },
+                { field: "Description" }
+
             ];
 
             // let the grid know which columns and what data to use

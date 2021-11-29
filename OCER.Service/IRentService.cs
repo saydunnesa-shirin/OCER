@@ -7,6 +7,8 @@ namespace OCER.Service
     {
         public bool AddToRent(RentDetail rentDetail);
         public bool DeleteFromRent(RentDetail rentDetail);
+
+        public bool DeleteAllRentDetails();
         public List<RentDetail> GetRentDetails();
         public Rent GetRent();
         public decimal CalculatePrice(int equipmentType, int noOfDays);

@@ -9,11 +9,13 @@ namespace OCER.Web
         public Mapper()
         {
             CreateMap<Equipment, EquipmentViewModel>()
-                .ForMember(vm => vm.EquipmentTypeId, m => m.MapFrom(src => (int)src.EquipmentType));
+                .ForMember(vm => vm.EquipmentTypeId, m => m.MapFrom(src => (int)src.EquipmentType))
+                .ForMember(vm => vm.EquipmentType, m => m.MapFrom(src => src.EquipmentType));
 
             CreateMap<EquipmentViewModel, RentDetail>()
             .ForMember(dest => dest.EquipmentId, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.Days, opt => opt.MapFrom(src => src.Days));
+
         }
     }
 }
