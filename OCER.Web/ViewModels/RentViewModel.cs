@@ -16,6 +16,9 @@ namespace OCER.Web.ViewModels
     {
         public int Id { get; set; }
         public int RentId { get; set; }
+        public int EquipmentTypeId { get; set; }
+        public string EquipmentType { get; set; }
+        public int EquipmentId { get; set; }
         public string EquipmentName { get; set; }
         public int Days { get; set; }
         public decimal Price { get; set; }

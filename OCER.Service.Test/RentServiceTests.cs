@@ -23,7 +23,7 @@ namespace OCER.Service.Test
         }
 
         [Test]
-        public void CalculatePriceByEquipmentTypeZeroAndNoOfDaysZero_Test()
+        public void CalculatePriceByEquipmentTypeZeroAndNoOfDaysZero()
         {
             //Arrange
             var equipmentType = 0; var noOfDays = 0;
@@ -63,31 +63,84 @@ namespace OCER.Service.Test
             Assert.AreEqual(actual, result);
         }
 
+        [Test]
         public void CalculatePrice_ReturnCurrectPrice_ForEquipmentTypeRegular()
         {
             //Arrange
             var equipmentType = (int)EquipmentType.Regular; var noOfDays = 5;
 
             //Act
-            var actual = (int)FeeType.OneTime + (int)FeeType.Premium * noOfDays;
+            var actual = (int)FeeType.OneTime + (int)FeeType.Premium * 2 + (int)FeeType.Regular * (noOfDays - 2);
             var result = _rentService.CalculatePrice(equipmentType, noOfDays);
             //Assert
 
             Assert.AreEqual(actual, result);
         }
 
+        [Test]
         public void CalculatePrice_ReturnCurrectPrice_ForEquipmentTypeSpecialized()
         {
             //Arrange
             var equipmentType = (int)EquipmentType.Specialized; var noOfDays = 5;
 
             //Act
-            var actual = (int)FeeType.OneTime + (int)FeeType.Premium * noOfDays;
+            var actual = (int)FeeType.Premium * 3 + (int)FeeType.Regular * (noOfDays - 3);
             var result = _rentService.CalculatePrice(equipmentType, noOfDays);
             //Assert
 
             Assert.AreEqual(actual, result);
         }
 
+        [Test]
+        public void CalculateBonusByTypeZero()
+        {
+            //Arrange
+            var equipmentType = 0;
+
+            //Act
+            var result = _rentService.CalculateBonus(equipmentType);
+            //Assert
+
+            Assert.AreEqual(0, result);
+        }
+
+        [Test]
+        public void CalculateBonus_ReturnCurrectBonus_ForEquipmentTypeHavey()
+        {
+            //Arrange
+            var equipmentType = EquipmentType.Heavy;
+
+            //Act
+            var result = _rentService.CalculateBonus((int)equipmentType);
+            //Assert
+
+            Assert.AreEqual(2, result);
+        }
+
+        [Test]
+        public void CalculateBonus_ReturnCurrectBonus_ForEquipmentTypeRegular()
+        {
+            //Arrange
+            var equipmentType = EquipmentType.Regular;
+
+            //Act
+            var result = _rentService.CalculateBonus((int)equipmentType);
+            //Assert
+
+            Assert.AreEqual(1, result);
+        }
+
+        [Test]
+        public void CalculateBonus_ReturnCurrectBonus_ForEquipmentTypeSpecialized()
+        {
+            //Arrange
+            var equipmentType = EquipmentType.Specialized;
+
+            //Act
+            var result = _rentService.CalculateBonus((int)equipmentType);
+            //Assert
+
+            Assert.AreEqual(1, result);
+        }
     }
 }

@@ -10,11 +10,11 @@ namespace OCER.Repository
            AllEquipments =
            new List<Equipment>
             {
-                new Equipment{Id=1, Name="Caterpillar bulldozer", InStock=true, EquipmentType = EquipmentType.Heavy},
-                new Equipment{Id=2, Name="KamAZ truck", InStock=true, EquipmentType = EquipmentType.Regular},
-                new Equipment{Id=3, Name="Komatsu crane", InStock=true, EquipmentType = EquipmentType.Heavy},
-                new Equipment{Id=4, Name="Volvo steamroller", InStock=true, EquipmentType = EquipmentType.Regular},
-                new Equipment{Id=5, Name="Bosch jackhammer", InStock=true, EquipmentType = EquipmentType.Specialized}
+                new Equipment{Id=1, Name="Caterpillar bulldozer", InStock=true, EquipmentType = EquipmentType.Heavy, Description = "Engine Model: Cat C3.6, Power - Net: 80 HP, Operating Weight: 17855 lb" },
+                new Equipment{Id=2, Name="KamAZ truck", InStock=true, EquipmentType = EquipmentType.Regular, Description = "Engine Model: Cat C3.6, Power - Net: 80 HP, Operating Weight: 17855 lb" },
+                new Equipment{Id=3, Name="Komatsu crane", InStock=true, EquipmentType = EquipmentType.Heavy, Description = "Engine Model: Cat C3.6, Power - Net: 80 HP, Operating Weight: 17855 lb" },
+                new Equipment{Id=4, Name="Volvo steamroller", InStock=true, EquipmentType = EquipmentType.Regular, Description = "Engine Model: Cat C3.6, Power - Net: 80 HP, Operating Weight: 17855 lb" },
+                new Equipment{Id=5, Name="Bosch jackhammer", InStock=true, EquipmentType = EquipmentType.Specialized, Description = "Engine Model: Cat C3.6, Power - Net: 80 HP, Operating Weight: 17855 lb" }
             };
 
             AllCustomers =
@@ -27,6 +27,7 @@ namespace OCER.Repository
             Rent = new Rent();
             RentDetails = new List<RentDetail>();
         }
+
         public static int UserId = 2;
         public static IEnumerable<Equipment> AllEquipments;
         public static List<Customer> AllCustomers;

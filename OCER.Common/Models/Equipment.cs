@@ -17,5 +17,7 @@ namespace OCER.Common.Models
         [Required]
         public bool InStock { get; set; }
 
+        public string Description { get; set; }
+
     }
 }

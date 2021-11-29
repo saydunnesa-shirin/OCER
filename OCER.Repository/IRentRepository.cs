@@ -5,10 +5,9 @@ namespace OCER.Repository
 {
     public interface IRentRepository
     {
-        public bool AddToRent(RentDetail rentDetail);
-
+        public bool AddRentDetail(RentDetail rentDetail);
         public bool DeleteFromRent(RentDetail rentDetail);
-
+        public bool DeleteAllRentDetails();
         public Rent GetRent();
         public List<RentDetail> GetRentDetails();
     }

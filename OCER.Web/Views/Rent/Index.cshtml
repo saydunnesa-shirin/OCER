@@ -3,18 +3,20 @@
     ViewData["Title"] = "Rent";
 }
 
-<h2>Rent Confirmation</h2>
-<h4>Please review and confirm rent items</h4>
-
+<h2>Rented Equipments</h2>
+<div class="alert alert-success" role="alert" id="msgSuccess">
+Rent information has updated.
+</div>
 <div>
-    <div id="rentGrid" class="ag-theme-alpine" style="height: 400px; width:1000px;"></div>
+    <div id="rentGrid" class="ag-theme-alpine" style="height: 400px; width: 100%;"></div>
 </div>
 <br /> <br />
-<button id="ConfirmRent"class="btn btn-primary">Confirm</button>
+<button id="ConfirmRent"class="btn btn-primary">Update</button>
 
 @section Scripts{
 
     <script type="text/javascript">
+    $('#msgSuccess').hide();
 
     //Grid start
         const columnDefs = [
@@ -26,6 +28,7 @@
              },
             { field: "Id", hide:true },
             { field: "EquipmentName" },
+            { field: "EquipmentType", sortable: true, filter: true},
             { field: "Days" },
             { field: "Price"}
         ];
@@ -36,18 +39,16 @@
             defaultColDef: {
             suppressKeyboardEvent: params => {
               if (!params.editing) {
-                let isBackspaceKey = params.event.keyCode === 8;
+                //let isBackspaceKey = params.event.keyCode === 8;
                 let isDeleteKey = params.event.keyCode === 46;
 
-                // Delete selected rows with back space
+                // Delete selected rows
 
                 if (isDeleteKey) {
                   const selectedRows = params.api.getSelectedRows();
                   params.api.applyTransaction({ remove: selectedRows });
                   return true;
                 }
-
-
                 return false;
               }
             }
@@ -69,22 +70,30 @@
                 data = JSON.parse(data)
                 console.log(data)
                 gridOptions.api.setRowData(data);
-            });
+        });
     //grid end
 
 
-        $('#ConfirmRent').on('click', function () {
-                
-                var equipments = [];
-                gridOptions.api.forEachNode(function (node) {
-                    equipments.push(node.data);
-                });
+    $('#ConfirmRent').on('click', function () {
 
-                $.post('Rent/ConfirmRent', { equipments: equipments },
-	                function () {
-                        console.log('Equipment(s) added to rent.');
-	                });
+        if(confirm("Are you sure to update rent information?")){
+            var equipments = [];
+            gridOptions.api.forEachNode(function (node) {
+                equipments.push(node.data);
             });
+
+            $.post('Rent/ConfirmRent', { equipments: equipments },
+	            function () {
+
+                    $('#msgSuccess').show().fadeOut(3000);
+                    console.log('Equipment(s) added to rent');
+	        });
+        }
+        else{
+            return false;
+        }
+            
+    });
 
          
         $('#GenerateInvoice').on('click', function () {
