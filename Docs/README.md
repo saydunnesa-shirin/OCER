@@ -5,7 +5,7 @@ It is an online construction equipment rental application. Customers can choose 
 Visual Studio 2019, .NET 5 MVC, AG-Grid.
 
 ## Project Structure
-![Project Structure Image](images/project_structure.png)
+![Project Structure Image](images/project_structure.PNG)
 
 ## Data Store
 I use a mock repository to store some static data.
