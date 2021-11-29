@@ -30,4 +30,4 @@ Renting any equipment or processing an invoice will involve the following steps:
 
 ## Class Diagram
 
-![Class Diagram Image](images/class_diagram.png)
+![Class Diagram Image](images/class_diagram.PNG)
