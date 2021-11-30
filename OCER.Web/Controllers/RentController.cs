@@ -37,6 +37,7 @@ namespace OCER.Web.Controllers
             try
             {
                 List<EquipmentViewModel> rentedEquipments = equipments.Where(x => x.Days > 0).ToList();
+
                 rentedEquipments.ForEach
                 (
                     x =>
@@ -46,9 +47,13 @@ namespace OCER.Web.Controllers
                         _equipmentService.StockOutEquipment(rentDetail.EquipmentId);
                     }
                 );
+
+                _logger.LogInformation("Added new equipment to the rent.");
             }
             catch(Exception ex)
             {
+                _logger.LogError(ex, "Error renting equipment");
+                throw;
             }
         }
 
@@ -74,7 +79,7 @@ namespace OCER.Web.Controllers
 
                 _rentService.DeleteAllRentDetails();
 
-                _logger.LogInformation("Delete all rented items from rent detail.");
+                _logger.LogInformation("Deleted all rented equipment from rent detail.");
 
                 deatils.ForEach
                 (
@@ -84,10 +89,13 @@ namespace OCER.Web.Controllers
                         _equipmentService.StockOutEquipment(x.EquipmentId);
                     }
                 );
+
+                _logger.LogInformation("Added new equipment to the rent.");
             }
             catch(Exception ex)
             {
-
+                _logger.LogError(ex, "Error renting equipment");
+                throw;
             }
         }
 
@@ -135,10 +143,9 @@ namespace OCER.Web.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex, "Error getting rent equipment");
+                throw;
             }
-
-            return rentViewModel;
         }
     }
 }

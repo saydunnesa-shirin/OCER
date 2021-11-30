@@ -8,6 +8,7 @@ using OCER.Service;
 using AutoMapper;
 using OCER.Common.Models;
 using System.Text.Json;
+using System;
 
 namespace OCER.Web.Controllers
 {
@@ -27,10 +28,18 @@ namespace OCER.Web.Controllers
 
         public JsonResult GetData()
         {
-            var equipments = _equipmentService.AllEquipments(true).OrderBy(o=>o.Name).ToList();
-            var data = _mapper.Map<List<Equipment>, List<EquipmentViewModel>>(equipments);
-            var json = JsonSerializer.Serialize(data);
-            return Json(json);
+            try
+            {
+                var equipments = _equipmentService.AllEquipments(true).OrderBy(o => o.Name).ToList();
+                var data = _mapper.Map<List<Equipment>, List<EquipmentViewModel>>(equipments);
+                var json = JsonSerializer.Serialize(data);
+                return Json(json);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "Error getting equipment");
+                throw;
+            }            
         }
 
         public IActionResult Index()
